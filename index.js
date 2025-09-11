@@ -27,7 +27,7 @@ const showQuestion = (index) => {
     // Create question Element and get question text from the array of objects
     const questionEl = document.createElement("h2");
     questionEl.textContent = currentQuestion.question;
-    questionEl.classList.add("text-x1", "font-semibold", "mb-4"); // Tailwind CSS classes for styling
+    questionEl.classList.add("text-xl", "font-semibold", "mb-4"); // Tailwind CSS classes for styling
     quizContainer.appendChild(questionEl);   // Append question to the quiz container
 
     // creating radio buttons for options
@@ -70,6 +70,16 @@ startBtn.addEventListener("click", () => {
 let currentQuestionIndex = 0;
 let score = 0; // to keep track of the score
 
+// function to show final result
+function showFinalResult() {
+    quizContainer.classList.add("hidden");
+    submitBtn.classList.add("hidden");
+    resultDiv.textContent = `You scored ${score} out of ${quizData.length}`;
+    resultDiv.classList.remove("hidden");
+    resultDiv.classList.remove("text-green-700", "text-green-400"); 
+    resultDiv.classList.add("text-green-100"); 
+}
+
 // adding event listener to the submit button
 submitBtn.addEventListener("click", () => {
     // Get the selected answer from the radio buttons
@@ -79,19 +89,40 @@ submitBtn.addEventListener("click", () => {
         alert("Please select an answer before submitting.");
         return;
     }
-    // check if the answer is correct
-    const answer = selectedOption.value;
-    if (answer === quizData[currentQuestionIndex].answer) score++; // increase score if the answer is correct
-    // move to the next question
-    currentQuestionIndex++; 
-    if (currentQuestionIndex < quizData.length) {
-        showQuestion(currentQuestionIndex); // show next question if there are more questions
+    const userAnswer = selectedOption.value;
+    const correctAnswer = quizData[currentQuestionIndex].answer;
+    // celebrate if the answer is correct
+    if (userAnswer === correctAnswer) {
+        confetti({
+            particleCount: 120,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+        score++; // increase score if the answer is correct
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            showQuestion(currentQuestionIndex);
+        } else {
+            showFinalResult();
+        }
     } else {
-        // finnish the quiz
-        quizContainer.classList.add("hidden");
-        submitBtn.classList.add("hidden");
-        resultDiv.textContent = `You scored ${score} out of ${quizData.length}`;
+        // show animated sad emoji if the answer is wrong
+        resultDiv.innerHTML = `<span class="animate-bounce text-6xl inline-block">😢</span>`;
         resultDiv.classList.remove("hidden");
+        setTimeout(() => {
+            resultDiv.classList.add("hidden");
+            resultDiv.innerHTML = "";
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                showQuestion(currentQuestionIndex);
+            } else {
+                quizContainer.classList.add("hidden");
+                submitBtn.classList.add("hidden");
+                resultDiv.textContent = `You scored ${score} out of ${quizData.length}`;
+                resultDiv.classList.remove("hidden");
+                resultDiv.classList.add("text-blue-900"); // Add this line for green text
+            }
+        }, 1800); // hide the emoji after 1.8 seconds and show the next question
     }
 });
 

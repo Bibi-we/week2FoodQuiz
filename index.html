@@ -8,28 +8,29 @@
         <!-- Tailwind CSS CDN -->
          <script src="https://cdn.tailwindcss.com"></script>
     </head>
-    <body class="bg-gray-100 text-gray-800 flex items-center justify-center min-h-screen">
+    <body class="bg-gray-200 text-gray-800 flex items-start justify-center min-h-screen mt-4"
+          style="background-image: url('https://images.unsplash.com/photo-1708335583165-57aa131a4969?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cXVpeiUyMGZvb2R8ZW58MHx8MHx8fDA%3D'); background-size: cover; background-position: center;">
         
         <!-- initial info -->
-        <div id="initial-info" class="text-center p-6 bg-white rounded-lg shadow-lg max-w-2xl">
-            <h1 class="text-3xl font-bold mb-10">Welcome to the Food Around the World Quiz!</h1>
+        <div id="initial-info" class="text-center p-6 bg-gray-300 rounded-lg shadow-lg max-w-2xl">
+            <h1 class="text-3xl font-bold mb-4">Welcome to the Food Around the World Quiz!</h1>
             <p class="mb-6">Tets your knowledge about cuisines from different countries. There are at least 5 multiple-choice questions. Click Start to begin.</p>
-            <button id="start-btn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Start Quiz</button>
+            <button id="start-btn" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Start Quiz</button>
         </div>
 
         <!-- Quiz container -->
-            <div id="quiz-container" class="hidden w-full max-w-2xl bg-white p-6 rounded-lg shadow-lg">
+            <div id="quiz-container" class="hidden w-full max-w-2xl bg-green-200 p-4 rounded-lg shadow-lg ml-8">
             <!-- Quiz questions will go here by JS -->
             </div>
             
             <!-- Submit button -->
-            <button id="submit-btn" class="hidden mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">Submit Answers</button>
+            <button id="submit-btn" class="hidden mt-4 w-40 bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded ml-2">Submit Answers</button>
 
             <!-- Result display -->
             <div id="result" class="hidden mt-6 text-center font-bold"></div>
             
             <!-- JavaScript -->
             <script src="index.js"></script>
-        
+            <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
         </body> 
 </html>
