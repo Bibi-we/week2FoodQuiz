@@ -7,7 +7,7 @@ const quizData = [
     { question: "Which country is famous for Kebab Koobideh?", options: ["Iraq", "Iran", "Syria", "Turkey"], answer: "Iran" }
 ];
 
-// DOM elements
+// DOM elements to connect to html 
 const startBtn = document.getElementById("start-btn");
 const quizContainer = document.getElementById("quiz-container");
 const submitBtn = document.getElementById("submit-btn");
